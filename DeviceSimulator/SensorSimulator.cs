@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DeviceSimulator
 {
-    abstract class SensorSimulator<T>
+    public abstract class SensorSimulator<T> : ISensorSimulator
     {
         private string _description;
         private T _actualValue;
