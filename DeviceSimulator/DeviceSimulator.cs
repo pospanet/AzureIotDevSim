@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.Devices.Client;
@@ -11,19 +12,47 @@ namespace DeviceSimulator
         private readonly string _deviceId;
         private readonly string _iotHub;
         private readonly string _deviceKey;
+        
+        private readonly IDictionary<string, SensorSimulator> _sensors;
 
-        private const string ConnectionStringPatern = "HostName={0}.azure-devices.net;DeviceId={1};SharedAccessKey={2}";
+        private const string IoTHubDomain = "azure-devices.net";
 
         private readonly DeviceClient _client;
 
-        public DeviceSimulator(string deviceId, string iotHub, string deviceKey, DeviceTransportType deviceTransportType, IDictionary<string, ISensorSimulator> sensors)
+        public DeviceSimulator(string deviceId, string iotHub, string deviceKey, DeviceTransportType deviceTransportType, IDictionary<string, SensorSimulator> sensors)
         {
             this._deviceId = deviceId;
             this._iotHub = iotHub;
             this._deviceKey = deviceKey;
-            string connectionString = ComposeConnectionString(_deviceId, _iotHub, _deviceKey);
             TransportType transportType = GetTransportType(deviceTransportType);
-            _client = DeviceClient.CreateFromConnectionString(connectionString, _deviceId, transportType);
+            string hostname = string.Concat(iotHub, '.', IoTHubDomain);
+            IAuthenticationMethod authMethod = new DeviceAuthenticationWithRegistrySymmetricKey(_deviceId, _deviceKey);
+            _client = DeviceClient.Create(hostname, authMethod, transportType);
+            _sensors = sensors;
+            IotHubAutoUpdate = true;
+            MinimalDataUpdate = false;
+        }
+
+        public void Init()
+        {
+            foreach (KeyValuePair<string, SensorSimulator> sensor in _sensors)
+            {
+                sensor.Value.ValueUpdateCallback += UpdateSensorValue;
+            }
+        }
+
+        private void UpdateSensorValue(object sensor, ValueUpdateResult result)
+        {
+            string sensorName = _sensors.FirstOrDefault(pair => pair.Value == sensor).Key;
+            if(IotHubAutoUpdate)
+            {
+                SendDataToIoTHub(sensorName, result);
+            }
+        }
+
+        private void SendDataToIoTHub(string sensorName, ValueUpdateResult result)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<bool> Connect()
@@ -52,10 +81,15 @@ namespace DeviceSimulator
             }
         }
 
-        private static string ComposeConnectionString(string deviceId, string iotHub, string deviceKey)
-        {
-            return string.Format(ConnectionStringPatern, iotHub, deviceId, deviceKey);
-        }
+        /// <summary>
+        /// If true, device will automaticaly set data update to IoT hub, if connected
+        /// </summary>
+        public bool IotHubAutoUpdate { get; set; }
+
+        /// <summary>
+        /// If true, device wil sent just sensor value updates, else full set of all sensor data
+        /// </summary>
+        public bool MinimalDataUpdate { get; set; }
 
         private static TransportType GetTransportType(DeviceTransportType deviceTransportType)
         {
