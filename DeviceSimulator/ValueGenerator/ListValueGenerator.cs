@@ -1,28 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Text;
 
 namespace DeviceSimulator.ValueGenerator
 {
-    public class ListValueGenerator<T> : ISensorValueGenerator<T>
+    public class ListValueGenerator : ISensorValueGenerator
     {
-        private readonly IEnumerator<T> _valuesEnumerator;
+        private readonly IEnumerator _valuesEnumerator;
 
-        public ListValueGenerator(IEnumerable<T> values)
+        public ListValueGenerator(IEnumerable values)
         {
             _valuesEnumerator = values.GetEnumerator();
         }
-        public T GetValue(DateTime time)
+        public object GetValue(DateTime time)
         {
             return GetValue();
         }
 
-        public T GetValue(TimeSpan time)
+        public object GetValue(TimeSpan time)
         {
             return GetValue();
         }
 
-        private T GetValue()
+        private object GetValue()
         {
             T value = _valuesEnumerator.Current;
             if (!_valuesEnumerator.MoveNext())

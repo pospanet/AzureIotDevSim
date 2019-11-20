@@ -4,31 +4,32 @@ using System.Text;
 
 namespace DeviceSimulator
 {
-    public abstract class SensorSimulator<T> : ISensorSimulator
+    public abstract class SensorSimulator
     {
         private string _description;
-        private T _actualValue;
+        private object _actualValue;
         private string _unit;
-        private ISensorValueGenerator<T> _valueGenerator;
+        private ISensorValueGenerator _valueGenerator;
         private ISensorValueClock _sensorValueClock;
 
-        public SensorSimulator(ISensorValueGenerator<T> valueGenerator, ISensorValueClock sensorValueClock)
+        public SensorSimulator(ISensorValueGenerator valueGenerator, ISensorValueClock sensorValueClock)
         {
             _valueGenerator = valueGenerator;
             _sensorValueClock = sensorValueClock;
         }
 
-        public bool Init(T defaultValue, string unit = null, string description = null)
+        public bool Init(object defaultValue, string unit = null, string description = null)
         {
-            _actualValue = defaultValue is null ? default(T) : defaultValue;
+            _actualValue = defaultValue;
             _description = description;
             _unit = unit;
             return true;
         }
 
-        public T ActualValue { get => _actualValue; private set => _actualValue = value; }
+        public object ActualValue { get => _actualValue; private set => _actualValue = value; }
 
         public string Description { get => _description; }
+      
         public string Unit { get => _unit; }
     }
 }

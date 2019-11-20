@@ -16,7 +16,7 @@ namespace DeviceSimulator
 
         private readonly DeviceClient _client;
 
-        public DeviceSimulator(string deviceId, string iotHub, string deviceKey, DeviceTransportType deviceTransportType, IDictionary<string, ISensorSimulator sensors)
+        public DeviceSimulator(string deviceId, string iotHub, string deviceKey, DeviceTransportType deviceTransportType, IDictionary<string, ISensorSimulator> sensors)
         {
             this._deviceId = deviceId;
             this._iotHub = iotHub;

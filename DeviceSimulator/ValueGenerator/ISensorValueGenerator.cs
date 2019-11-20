@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 
 namespace DeviceSimulator
 {
-    public interface ISensorValueGenerator<T>
+    public interface ISensorValueGenerator
     {
-        public T GetValue(DateTime time);
-        public T GetValue(TimeSpan time);
+        public object GetValue(DateTime time);
+        public object GetValue(TimeSpan time);
     }
 }
