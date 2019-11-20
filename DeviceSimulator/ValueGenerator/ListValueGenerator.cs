@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Text;
 
 namespace DeviceSimulator.ValueGenerator
 {
@@ -24,7 +23,7 @@ namespace DeviceSimulator.ValueGenerator
 
         private object GetValue()
         {
-            T value = _valuesEnumerator.Current;
+            object value = _valuesEnumerator.Current;
             if (!_valuesEnumerator.MoveNext())
             {
                 _valuesEnumerator.Reset();

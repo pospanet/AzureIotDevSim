@@ -14,6 +14,7 @@ namespace DeviceSimulator.ValueGenerator
             _minValue = minValue;
             _maxValue = maxValue;
         }
+        #region ISensorValueGenerator
 
         public object GetValue(DateTime time)
         {
@@ -24,8 +25,9 @@ namespace DeviceSimulator.ValueGenerator
         {
             return GetValue();
         }
+        #endregion
 
-        public object GetValue()
+        public double GetValue()
         {
             return ((_maxValue - _minValue) * _random.NextDouble()) + _minValue;
         }

@@ -2,13 +2,13 @@
 
 namespace DeviceSimulator.ValueGenerator
 {
-    public class RandomIntValueGenerator : ISensorValueGenerator
+    public class RandomDateTimeValueGenerator : ISensorValueGenerator
     {
         private readonly Random _random;
-        private readonly int _minValue;
-        private readonly int _maxValue;
+        private readonly DateTime _minValue;
+        private readonly DateTime _maxValue;
 
-        public RandomIntValueGenerator(int minValue, int maxValue)
+        public RandomDateTimeValueGenerator(DateTime minValue, DateTime maxValue)
         {
             _random = new Random();
             _minValue = minValue;
@@ -27,9 +27,9 @@ namespace DeviceSimulator.ValueGenerator
         }
         #endregion
 
-        public int GetValue()
+        public DateTime GetValue()
         {
-                return _random.Next(_minValue, _maxValue);
+            return _minValue.Add((_maxValue - _minValue) * _random.NextDouble());
         }
     }
 }
