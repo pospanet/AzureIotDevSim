@@ -49,6 +49,8 @@ namespace DeviceSimulator
         public string Unit { get => _unit; }
 
         public string Type { get => _type; }
+
+        public string Id { get => _id; }
     }
 
     public class ValueUpdateResult
