@@ -56,11 +56,12 @@ namespace DeviceSimulator
         private async void UpdateSensorValue(object sensor, ValueUpdateResult result)
         {
             string sensorName = _sensors.FirstOrDefault(pair => pair.Value == sensor).Key;
-            if(IotHubAutoUpdate)
+            if (!IotHubAutoUpdate)
             {
-                DataMessage message = ConstructDeviceDataMessage(this, MinimalDataUpdate ? new[] { _sensors[sensorName] } :_sensors.Values);
-                await SendDataToIoTHub(this, sensorName, message);
+                return;
             }
+            DataMessage message = ConstructDeviceDataMessage(this, MinimalDataUpdate ? new[] { _sensors[sensorName] } : _sensors.Values);
+            await SendDataToIoTHub(this, sensorName, message);
         }
 
         private static DataMessage ConstructDeviceDataMessage(DeviceSimulator device, IEnumerable<SensorSimulator> sensors)
@@ -126,16 +127,12 @@ namespace DeviceSimulator
             {
                 case DeviceTransportType.Http:
                     return TransportType.Http1;
-                    break;
                 case DeviceTransportType.Amqp:
                     return TransportType.Amqp;
-                    break;
                 case DeviceTransportType.Mqtt:
                     return TransportType.Mqtt;
-                    break;
                 default:
                     return TransportType.Amqp;
-                    break;
             }
         }
 
