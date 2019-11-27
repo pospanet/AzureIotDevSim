@@ -1,18 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Azure.Devices;
 
 namespace DeviceSimulator
 {
     public class AssetManagementHelper
     {
         private readonly string _iotHub;
-        private readonly string _sasKey;
-        public AssetManagementHelper(string iotHub, string sasKey)
+        private readonly string _connectionString;
+
+        private RegistryManager _registryManager;
+
+        public AssetManagementHelper(string iotHub, string connectionString)
         {
             _iotHub = iotHub;
-            _sasKey = sasKey;
+            _connectionString = connectionString;
+            _registryManager = RegistryManager.CreateFromConnectionString(_connectionString);
         }
-
+        public async Task<DeviceSignature[]> CreateDevices(string[] Ids)
+        {
+            await _registryManager.OpenAsync();
+            IEnumerable<Task<Device>> deviceTaskList = Ids.Select(async id => await _registryManager.AddDeviceAsync(new Device(id)));
+            Task.WaitAll(deviceTaskList.ToArray());
+            IEnumerable<Device> devices = deviceTaskList.Select(task => task.Result);
+            return devices.Select(d => new DeviceSignature(d)).ToArray();
+        }
     }
 }
