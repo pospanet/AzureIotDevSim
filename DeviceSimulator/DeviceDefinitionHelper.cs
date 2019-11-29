@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DeviceSimulator
 {
-    class DeviceDefinition
+    public class DeviceDefinitionHelper
     {
     }
 }
