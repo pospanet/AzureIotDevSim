@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DeviceSimulator;
 using Microsoft.Azure.Devices;
 
-namespace DeviceSimulator
+namespace Pospa.Azure.IoT.DeviceSimulator
 {
     public class AssetManagementHelper
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DeviceSimulator.ValueGenerator
+namespace Pospa.Azure.IoT.DeviceSimulator.ValueGenerator
 {
     public class RandomIntValueGenerator : ISensorValueGenerator
     {

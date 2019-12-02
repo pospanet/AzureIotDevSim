@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace DeviceSimulator
+namespace Pospa.Azure.IoT.DeviceSimulator.SensorClock
 {
     public interface ISensorValueClock
     {

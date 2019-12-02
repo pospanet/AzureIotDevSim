@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 
-namespace DeviceSimulator.ValueGenerator
+namespace Pospa.Azure.IoT.DeviceSimulator.ValueGenerator
 {
     public class ListValueGenerator : ISensorValueGenerator
     {

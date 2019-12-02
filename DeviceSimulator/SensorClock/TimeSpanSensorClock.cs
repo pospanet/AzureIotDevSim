@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DeviceSimulator.SensorClock
+namespace Pospa.Azure.IoT.DeviceSimulator.SensorClock
 {
     public class TimeSpanSensorClock : ISensorValueClock
     {

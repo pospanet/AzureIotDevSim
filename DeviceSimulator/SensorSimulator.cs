@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace DeviceSimulator
+namespace Pospa.Azure.IoT.DeviceSimulator
 {
     public abstract class SensorSimulator
     {

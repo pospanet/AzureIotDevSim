@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Azure.Devices.Client;
 using Newtonsoft.Json;
 
-namespace DeviceSimulator
+namespace Pospa.Azure.IoT.DeviceSimulator
 {
     public class DeviceSimulator : IDisposable
     {

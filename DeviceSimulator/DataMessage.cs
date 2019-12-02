@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DeviceSimulator
+namespace Pospa.Azure.IoT.DeviceSimulator
 {
     [JsonObject]
     public class DataMessage

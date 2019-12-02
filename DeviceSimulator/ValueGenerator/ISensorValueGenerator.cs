@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace DeviceSimulator
+namespace Pospa.Azure.IoT.DeviceSimulator.ValueGenerator
 {
     public interface ISensorValueGenerator
     {

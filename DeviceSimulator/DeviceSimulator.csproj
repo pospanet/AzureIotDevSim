@@ -12,6 +12,8 @@
     <FileVersion>1.0.0.0</FileVersion>
     <Version>0.1.0</Version>
     <SignAssembly>false</SignAssembly>
+    <AssemblyName>Pospa.Azure.IoT.DeviceSimulator.DeviceSimulator</AssemblyName>
+    <RootNamespace>Pospa.Azure.IoT.DeviceSimulator.DeviceSimulator</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
