@@ -17,7 +17,7 @@ namespace Pospa.Azure.IoT.DeviceSimulator.WebAPI.Controllers
         public DeviceController()
         {
 
-            _assetManagementHelper = new AssetManagementHelper()
+            //_assetManagementHelper = new AssetManagementHelper();
         }
 
         // GET: api/Device

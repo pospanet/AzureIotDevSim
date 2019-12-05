@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DeviceSimulator;
 using Microsoft.Azure.Devices;
 
 namespace Pospa.Azure.IoT.DeviceSimulator
@@ -21,6 +20,8 @@ namespace Pospa.Azure.IoT.DeviceSimulator
             _connectionString = connectionString;
             _registryManager = RegistryManager.CreateFromConnectionString(_connectionString);
         }
+
+
         public async Task<DeviceSignature[]> CreateDevices(string[] Ids)
         {
             await _registryManager.OpenAsync();

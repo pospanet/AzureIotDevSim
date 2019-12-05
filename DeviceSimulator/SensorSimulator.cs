@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Pospa.Azure.IoT.DeviceSimulator.SensorClock;
+using Pospa.Azure.IoT.DeviceSimulator.ValueGenerator;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
